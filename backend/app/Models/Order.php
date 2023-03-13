@@ -13,6 +13,7 @@ class Order extends Model
 
     protected $fillable = [
         'value_total',
+        'user_id',
     ];
 
 }
