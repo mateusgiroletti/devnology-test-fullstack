@@ -9,7 +9,11 @@ class OrderController extends Controller
 {
     public function store(Request $request)
     {
+
+        $userId = $request->user()->id;
+
         $order = $request->order;
+        $order['user_id'] = $userId;
 
         $orderId = DB::table('orders')->insertGetId($order);
 
