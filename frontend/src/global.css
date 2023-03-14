@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-color-main: #fff;
+}
+
+body {
+    color: #0f1419;
+    -webkit-font-smoothing: antialiased;
+    background: var(--background-color-main);
+    background-color: #54a0ff;
+}
+
+body,
+input,
+textarea,
+button {
+    font: 400 1rem Roboto, sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1000px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.content {
+    width: 100%;
+    max-width: 800px;
+    margin: 30px;
+    background: #fff;
+    border-radius: 4px;
+    padding: 20px;
+}

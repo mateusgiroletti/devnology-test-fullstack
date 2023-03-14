@@ -1,7 +1,12 @@
-function App() {
+import Header from "./components/Header";
+import Home from "./pages/Home";
 
+function App() {
     return (
-        <h1>Test</h1>
+        <>
+            <Header />
+            <Home />
+        </>
     );
 }
 
