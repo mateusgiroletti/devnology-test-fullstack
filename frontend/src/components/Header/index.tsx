@@ -1,4 +1,5 @@
 import { ShoppingCart, User } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 
 import Search from "../Search";
 
@@ -7,9 +8,9 @@ import "./styles.css";
 function Header() {
     return (
         <header>
-            <a href="" className="home-title">
+            <Link to="/" className="home-title">
                 <strong>Minha Loja</strong>
-            </a>
+            </Link>
 
             <Search />
 
@@ -31,14 +32,14 @@ function Header() {
                 </div>
             </div>
 
-            <a href="" className="container-cart">
+            <Link to="/cart"  className="container-cart">
                 <ShoppingCart size={36} color="#FFF" />
 
                 <div>
                     <strong>Carrinho</strong>
                     <span>2 Itens</span>
                 </div>
-            </a>
+            </Link>
         </header>
     );
 }
