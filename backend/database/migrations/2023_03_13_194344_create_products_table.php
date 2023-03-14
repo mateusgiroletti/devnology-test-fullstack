@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->integer('value');
-            $table->float('discount_value', 4, 2);
-            $table->timestamps();
+            $table->float('discount_value', 4, 2)->nullable();
         });
     }
 
