@@ -15,4 +15,5 @@ class Product extends Model
         'value',
         'discount_value',
     ];
+
 }
