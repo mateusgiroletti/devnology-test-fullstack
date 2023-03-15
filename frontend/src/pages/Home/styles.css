@@ -12,7 +12,7 @@ main {
     margin-top: 1rem;
 }
 
-.list-products li{
+.list-products li {
     display: flex;
     flex-direction: column;
     border-radius: 0.4rem;
@@ -21,25 +21,40 @@ main {
 }
 
 
-.list-products li img{
+.list-products li img {
     align-self: center;
-    max-width: 15rem;
+    max-width: 20rem;
     border-radius: 0.5rem;
 }
 
-.list-products li strong{
+.list-products li .discount {
+    background-color: #54a0ff;
+    position: relative;
+    max-width: 20rem;
+    max-height: 2rem;
+    border-radius: 0 0 0.5rem 0.5rem ;
+    top: -2rem;
+    opacity: 0.8;
+}
+
+.list-products li .discount span{
+    display: flex;
+    justify-content: center;
+}
+
+.list-products li strong {
     font-size: 1.4rem;
     color: #000;
     margin-top: 0.3rem;
 }
 
-.list-products li span{
+.list-products li span {
     font-size: 1.2rem;
     color: #000;
     margin: 5px 0 20px;
 }
 
-.list-products li button{
+.list-products li button {
     background: #2e86de;
     color: #fff;
     border: 0;
@@ -53,3 +68,6 @@ main {
     filter: brightness(0.9);
 }
 
+.original-price {
+    font-size: 0.8rem;
+}

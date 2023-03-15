@@ -20,7 +20,6 @@ type AuthContextData = {
     signIn(credentitals: SignInCredentials): Promise<void>;
     signUp(credentitals: SignUpCredentials): Promise<void>;
     signOut(): void;
-    user: User;
     isAuthenticated: boolean;
 }
 
@@ -31,7 +30,7 @@ type AuthProviderProps = {
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const [user, setUser] = useState<User>();
+    const [user, setUser] = useState<User | null>();
     const isAuthenticated = !!user;
 
     useEffect(() => {
@@ -90,7 +89,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, signUp, isAuthenticated, user, signOut }}>
+        <AuthContext.Provider value={{ signIn, signUp, isAuthenticated, signOut }}>
             {children}
         </AuthContext.Provider>
     );

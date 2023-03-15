@@ -1,110 +1,66 @@
 import Header from "../../components/Header";
+import { useFetchProducts } from "../../hooks/useFetchProducts";
 import "./styles.css";
 
 function Home() {
+    const { productNational, productEuropeon, isFetching } = useFetchProducts();
+
+    function formatMoneyToReal(value: string) {
+        let newValue = value.replace(/\D/g, "");
+        newValue = newValue.replace(/(\d{1,2})$/, ",$1");
+        newValue = newValue.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+
+        return `R$ ${newValue}`;
+    }
+
     return (
         <>
             <Header />
 
             <main>
                 <section>
-                    <ul className="list-products">
-                        <li>
-                            <img src="http://placeimg.com/640/480/business" alt="" />
+                    {
+                        isFetching ? (
+                            <p>Carregando</p>
+                        ) : (
+                            <ul className="list-products">
+                                {productNational?.map(product => {
+                                    return (
+                                        <li key={product.id}>
+                                            <img src={product.imagem} alt="" />
 
-                            <strong>Tenis legal</strong>
-                            <span>R$130,30</span>
+                                            <strong>{product.nome}</strong>
+                                            <span>{formatMoneyToReal(product.preco)}</span>
 
-                            <button>Adicionar ao Carrinho</button>
-                        </li>
+                                            <button>Adicionar ao Carrinho</button>
+                                        </li>
+                                    );
+                                })}
+                                {productEuropeon?.map(product => {
+                                    const price = product.hasDiscount ? product.price - (product.price * product.discountValue) : product.price;
+                                    return (
+                                        <li key={product.id}>
+                                            <img src={product.gallery[0]} alt="" />
 
-                        <li>
-                            <img src="http://placeimg.com/640/480/business" alt="" />
+                                            {product.hasDiscount && (
+                                                <div className="discount">
+                                                    <span>{product.discountValue * 100}% OFF</span>
+                                                </div>
+                                            )}
 
-                            <strong>Tenis legal</strong>
-                            <span>R$130,30</span>
+                                            <strong>{product.name}</strong>
 
-                            <button>Adicionar ao Carrinho</button>
-                        </li>
-
-                        <li>
-                            <img src="http://placeimg.com/640/480/business" alt="" />
-
-                            <strong>Tenis legal</strong>
-                            <span>R$130,30</span>
-
-                            <button>Adicionar ao Carrinho</button>
-                        </li>
-
-                        <li>
-                            <img src="http://placeimg.com/640/480/business" alt="" />
-
-                            <strong>Tenis legal</strong>
-                            <span>R$130,30</span>
-
-                            <button>Adicionar ao Carrinho</button>
-                        </li>
-
-                        <li>
-                            <img src="http://placeimg.com/640/480/business" alt="" />
-
-                            <strong>Tenis legal</strong>
-                            <span>R$130,30</span>
-
-                            <button>Adicionar ao Carrinho</button>
-                        </li>
-
-
-                        <li>
-                            <img src="http://placeimg.com/640/480/business" alt="" />
-
-                            <strong>Tenis legal</strong>
-                            <span>R$130,30</span>
-
-                            <button>Adicionar ao Carrinho</button>
-                        </li>
-
-
-                        <li>
-                            <img src="http://placeimg.com/640/480/business" alt="" />
-
-                            <strong>Tenis legal</strong>
-                            <span>R$130,30</span>
-
-                            <button>Adicionar ao Carrinho</button>
-                        </li>
-
-
-                        <li>
-                            <img src="http://placeimg.com/640/480/business" alt="" />
-
-                            <strong>Tenis legal</strong>
-                            <span>R$130,30</span>
-
-                            <button>Adicionar ao Carrinho</button>
-                        </li>
-
-
-                        <li>
-                            <img src="http://placeimg.com/640/480/business" alt="" />
-
-                            <strong>Tenis legal</strong>
-                            <span>R$130,30</span>
-
-                            <button>Adicionar ao Carrinho</button>
-                        </li>
-
-
-                        <li>
-                            <img src="http://placeimg.com/640/480/business" alt="" />
-
-                            <strong>Tenis legal</strong>
-                            <span>R$130,30</span>
-
-                            <button>Adicionar ao Carrinho</button>
-                        </li>
-
-                    </ul>
+                                            {product.hasDiscount && (
+                                                <del className="original-price">{formatMoneyToReal(product.price)}</del>
+                                            )}
+                                            <span>{formatMoneyToReal(String(price))}</span>
+                                            <button>Adicionar ao Carrinho</button>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        )
+                    }
                 </section>
             </main>
         </>

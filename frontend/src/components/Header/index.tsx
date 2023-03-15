@@ -1,5 +1,5 @@
 import { ShoppingCart, User } from "@phosphor-icons/react";
-import { FormEvent, useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
