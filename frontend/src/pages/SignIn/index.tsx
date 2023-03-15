@@ -1,13 +1,28 @@
-import { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { FormEvent, useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import "./styles.css";
 
 function SignIn() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState<boolean>(false);
+    const navigate = useNavigate();
 
-    function handleSubmit(event: FormEvent) {
+    const { signIn } = useContext(AuthContext);
+
+    async function handleSubmit(event: FormEvent) {
         event.preventDefault();
+
+        const data = {
+            email,
+            password
+        };
+
+        await signIn(data);
+
+        navigate("/cart");
     }
 
     return (
@@ -15,11 +30,17 @@ function SignIn() {
             <div className="content-login">
                 <strong>Entrar</strong>
                 <form onSubmit={handleSubmit}>
-                    <input name="email" type="email" placeholder="Seu e-mail" />
+                    <input
+                        name="email"
+                        type="email"
+                        placeholder="Seu e-mail"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                     <input
                         name="password"
                         type="password"
                         placeholder="Sua senha"
+                        onChange={(e) => setPassword(e.target.value)}
                     />
 
                     <button type="submit">{loading ? "Carregando..." : "Acessar"}</button>

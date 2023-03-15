@@ -1,9 +1,11 @@
-import { RouterProvider } from "react-router-dom";
-import { router } from "./routes";
+import { AuthProvider } from "./contexts/AuthContext";
+import RoutesApp from "./routes";
 
 function App() {
     return (
-        <RouterProvider router={router} />
+        <AuthProvider>
+            <RoutesApp />
+        </AuthProvider>
     );
 }
 
