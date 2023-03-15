@@ -14,7 +14,7 @@ header {
     text-decoration: none;
 }
 
-.container-login {
+.container-header-login {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -22,21 +22,21 @@ header {
     gap: 0.5rem;
 }
 
-.container-cart:hover {
+.container-header-login:hover {
     opacity: 0.7;
 }
 
-.container-login a {
+.container-header-login a {
     text-decoration: none;
     color: #fff;
     font-weight: 700
 }
 
-.container-login span {
+.container-header-login span {
     color: #fff;
 }
 
-.container-cart {
+.container-header-cart {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -44,21 +44,21 @@ header {
     gap: 0.5rem;
 }
 
-.container-cart:hover {
+.container-header-cart:hover {
     opacity: 0.7;
 }
 
-.container-cart div {
+.container-header-cart div {
     text-align: right;
     margin-right: 10px;
 }
 
-.container-cart div strong {
+.container-header-cart div strong {
     display: flex;
     color: #fff;
 }
 
-.container-cart div span {
+.container-header-cart div span {
     font-size: 12px;
     color: #fff;
 }

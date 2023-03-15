@@ -14,25 +14,25 @@ function Header() {
 
             <Search />
 
-            <div className="container-login">
+            <div className="container-header-login">
                 <a href="">
                     <User size={36} weight="bold" color="#FFF" />
                 </a>
 
                 <div>
                     <div>
-                        <a href="">Entrar</a>
+                        <Link to="/signIn" >Entrar</Link>
                     </div>
                     <span>
                         ou
                     </span>
                     <div>
-                        <a href="">Cadastrar</a>
+                        <Link to="/signUp" >Cadastrar</Link>
                     </div>
                 </div>
             </div>
 
-            <Link to="/cart"  className="container-cart">
+            <Link to="/cart" className="container-header-cart">
                 <ShoppingCart size={36} color="#FFF" />
 
                 <div>
