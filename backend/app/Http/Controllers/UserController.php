@@ -20,6 +20,11 @@ class UserController extends Controller
         auth()->login($user);
         $token = $user->createToken('JWT');
 
-        return response()->json($token->plainTextToken);
+        return response()->json(
+            [
+                "email" => $request['email'],
+                "token" => $token->plainTextToken
+            ]
+        );
     }
 }

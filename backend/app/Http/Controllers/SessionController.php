@@ -17,7 +17,12 @@ class SessionController extends Controller
             $user = Auth::user();
             $token = $user->createToken('JWT');
 
-            return response()->json($token->plainTextToken);
+            return response()->json(
+                [
+                    "email" => $request['email'],
+                    "token" => $token->plainTextToken
+                ]
+            );
         }
 
         return response()->json(
