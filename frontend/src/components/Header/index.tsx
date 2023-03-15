@@ -1,11 +1,15 @@
 import { ShoppingCart, User } from "@phosphor-icons/react";
+import { FormEvent, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import Search from "../Search";
 
 import "./styles.css";
 
 function Header() {
+    const { isAuthenticated, signOut } = useContext(AuthContext);
+
     return (
         <header>
             <Link to="/" className="home-title">
@@ -15,21 +19,29 @@ function Header() {
             <Search />
 
             <div className="container-header-login">
-                <a href="">
-                    <User size={36} weight="bold" color="#FFF" />
-                </a>
+                <User size={36} weight="bold" color="#FFF" />
 
-                <div>
-                    <div>
-                        <Link to="/signIn" >Entrar</Link>
-                    </div>
-                    <span>
-                        ou
-                    </span>
-                    <div>
-                        <Link to="/signUp" >Cadastrar</Link>
-                    </div>
-                </div>
+                {
+                    isAuthenticated ? (
+                        <div className="logged">
+                            <span>
+                                Bem vindo
+                            </span>
+                            <a href="" onClick={() => signOut()}>
+                                Clique aqui para sair
+                            </a>
+                        </div>
+
+                    ) : (
+                        <div className="logged">
+                            <Link to="/signIn" >Entrar</Link>
+                            <span>
+                                ou
+                            </span>
+                            <Link to="/signUp" >Cadastrar</Link>
+                        </div>
+                    )
+                }
             </div>
 
             <Link to="/cart" className="container-header-cart">

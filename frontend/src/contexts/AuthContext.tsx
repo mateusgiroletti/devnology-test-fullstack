@@ -1,5 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { api } from "../services/api";
 
 type User = {
@@ -11,8 +10,16 @@ type SignInCredentials = {
     password: string;
 }
 
+type SignUpCredentials = {
+    name: string;
+    email: string;
+    password: string;
+}
+
 type AuthContextData = {
     signIn(credentitals: SignInCredentials): Promise<void>;
+    signUp(credentitals: SignUpCredentials): Promise<void>;
+    signOut(): void;
     user: User;
     isAuthenticated: boolean;
 }
@@ -25,7 +32,18 @@ export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<User>();
-    const isAuthenticated = false;
+    const isAuthenticated = !!user;
+
+    useEffect(() => {
+        const userToken = localStorage.getItem("user_token");
+
+        if (userToken) {
+            const { data: { email } } = JSON.parse(userToken);
+            setUser({
+                email
+            });
+        }
+    }, []);
 
     async function signIn({ email, password }: SignInCredentials) {
         try {
@@ -34,7 +52,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 password
             });
 
-            localStorage.setItem("user_token", JSON.stringify(data));
+            localStorage.setItem("user_token", JSON.stringify({ data }));
 
             setUser({
                 email
@@ -46,8 +64,33 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
     }
 
+    async function signUp({ name, email, password }: SignUpCredentials) {
+        try {
+            const { data } = await api.post("user", {
+                name,
+                email,
+                password
+            });
+
+            localStorage.setItem("user_token", JSON.stringify({ data }));
+
+            setUser({
+                email
+            });
+
+            return;
+        } catch (error) {
+            console.log("E-mail já cadastrado!");
+        }
+    }
+
+    function signOut() {
+        setUser(null);
+        localStorage.removeItem("user_token");
+    }
+
     return (
-        <AuthContext.Provider value={{ signIn, isAuthenticated, user }}>
+        <AuthContext.Provider value={{ signIn, signUp, isAuthenticated, user, signOut }}>
             {children}
         </AuthContext.Provider>
     );

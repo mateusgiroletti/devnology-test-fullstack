@@ -14,7 +14,7 @@ function SignIn() {
 
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
-
+        setLoading(true);
         const data = {
             email,
             password
@@ -22,7 +22,8 @@ function SignIn() {
 
         await signIn(data);
 
-        navigate("/cart");
+        setLoading(false);
+        navigate("/");
     }
 
     return (
