@@ -1,0 +1,99 @@
+.wrapper-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-cart {
+    padding: 2rem;
+    width: 90rem;
+    background: #fff;
+    border-radius: 0.4rem;
+}
+
+.container-cart table {
+    width: 100%;
+}
+
+.container-cart table thead th {
+    color: #303030;
+    text-align: left;
+    padding: 1rem;
+}
+
+.container-cart table tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.container-cart table img {
+    height: 10rem;
+}
+
+.container-cart table strong {
+    color: #333;
+    display: block;
+}
+
+.container-cart table span {
+    display: block;
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.container-cart table div {
+    display: flex;
+    align-items: center;
+}
+
+.container-cart table div input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #666;
+    padding: 6px;
+    width: 50px;
+}
+
+.container-cart table button {
+    background: none;
+    border: 0;
+    padding: 6px;
+}
+
+.container-cart footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-cart footer button {
+    background: #2e86de;
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: auto;
+    padding: 12px;
+}
+
+.container-cart footer button:hover {
+    filter: brightness(0.9);
+}
+
+.container-cart footer div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-cart footer div span {
+    color: #000;
+    font-weight: bold;
+}
+
+.container-cart footer div strong {
+    font-size: 28px;
+    margin-left: 5px;
+}
