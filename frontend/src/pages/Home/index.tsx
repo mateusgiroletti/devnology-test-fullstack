@@ -1,9 +1,11 @@
+import { useState } from "react";
 import Header from "../../components/Header";
 import { useFetchProducts } from "../../hooks/useFetchProducts";
 import "./styles.css";
 
 function Home() {
     const { productNational, productEuropeon, isFetching } = useFetchProducts();
+    const [search, setSearch] = useState("");
 
     function formatMoneyToReal(value: string) {
         let newValue = value.replace(/\D/g, "");
@@ -13,18 +15,29 @@ function Home() {
         return `R$ ${newValue}`;
     }
 
+    const productsNationalFilter = productNational?.filter((product: any) => product.nome.startsWith(search));
+    const productsEuropeonFilter = productEuropeon?.filter((product: any) => product.name.startsWith(search));
+
     return (
         <>
             <Header />
 
             <main>
+                <nav>
+                    <input
+                        type="text"
+                        placeholder="Digite para pesquisar"
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                </nav>
+
                 <section>
                     {
                         isFetching ? (
                             <p>Carregando</p>
                         ) : (
                             <ul className="list-products">
-                                {productNational?.map(product => {
+                                {productsNationalFilter?.map(product => {
                                     return (
                                         <li key={product.id}>
                                             <img src={product.imagem} alt="" />
@@ -36,7 +49,7 @@ function Home() {
                                         </li>
                                     );
                                 })}
-                                {productEuropeon?.map(product => {
+                                {productsEuropeonFilter?.map(product => {
                                     const price = product.hasDiscount ? product.price - (product.price * product.discountValue) : product.price;
                                     return (
                                         <li key={product.id}>

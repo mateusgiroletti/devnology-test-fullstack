@@ -3,8 +3,6 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
-import Search from "../Search";
-
 import "./styles.css";
 
 function Header() {
@@ -15,8 +13,6 @@ function Header() {
             <Link to="/" className="home-title">
                 <strong>Minha Loja</strong>
             </Link>
-
-            <Search />
 
             <div className="container-header-login">
                 <User size={36} weight="bold" color="#FFF" />

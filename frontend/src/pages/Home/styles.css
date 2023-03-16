@@ -1,8 +1,26 @@
 main {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
+
+main nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    max-height: 3rem;
+    width: 40rem;
+}
+
+main nav input {
+    flex: 1;
+    border: 1px solid grey;
+    border-radius: 0.5rem;
+    padding: 0.6rem;
+}
+
 
 .list-products {
     display: grid;
@@ -32,12 +50,12 @@ main {
     position: relative;
     max-width: 20rem;
     max-height: 2rem;
-    border-radius: 0 0 0.5rem 0.5rem ;
+    border-radius: 0 0 0.5rem 0.5rem;
     top: -2rem;
     opacity: 0.8;
 }
 
-.list-products li .discount span{
+.list-products li .discount span {
     display: flex;
     justify-content: center;
 }
