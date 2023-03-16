@@ -1,19 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+
 import Header from "../../components/Header";
+import { CartContext } from "../../contexts/CartContext";
 import { useFetchProducts } from "../../hooks/useFetchProducts";
+import formatMoneyToReal from "../../utils/formatMoneyToReal";
+
 import "./styles.css";
 
 function Home() {
     const { productNational, productEuropeon, isFetching } = useFetchProducts();
+    const { handleAddProductToCart } = useContext(CartContext);
+
     const [search, setSearch] = useState("");
-
-    function formatMoneyToReal(value: string) {
-        let newValue = value.replace(/\D/g, "");
-        newValue = newValue.replace(/(\d{1,2})$/, ",$1");
-        newValue = newValue.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-
-        return `R$ ${newValue}`;
-    }
 
     const productsNationalFilter = productNational?.filter((product: any) => product.nome.startsWith(search));
     const productsEuropeonFilter = productEuropeon?.filter((product: any) => product.name.startsWith(search));
@@ -38,6 +36,10 @@ function Home() {
                         ) : (
                             <ul className="list-products">
                                 {productsNationalFilter?.map(product => {
+                                    product.name = product.nome;
+                                    product.newPrice = Number(product.preco).toFixed(2);
+                                    product.image = product.imagem;
+                                    product.origin = "nacional";
                                     return (
                                         <li key={product.id}>
                                             <img src={product.imagem} alt="" />
@@ -45,12 +47,21 @@ function Home() {
                                             <strong>{product.nome}</strong>
                                             <span>{formatMoneyToReal(product.preco)}</span>
 
-                                            <button>Adicionar ao Carrinho</button>
+                                            <button
+                                                type="button"
+                                                onClick={() => handleAddProductToCart(product)}
+                                            >
+                                                Adicionar ao Carrinho
+                                            </button>
                                         </li>
                                     );
                                 })}
                                 {productsEuropeonFilter?.map(product => {
-                                    const price = product.hasDiscount ? product.price - (product.price * product.discountValue) : product.price;
+                                    const originalPrice = product.price;
+                                    const newPrice = product.hasDiscount ? (product.price - (product.price * product.discountValue)).toFixed(2) : product.price;
+                                    product.origin = "europeon";
+                                    product.image = product.gallery[0];
+                                    product.newPrice = newPrice;
                                     return (
                                         <li key={product.id}>
                                             <img src={product.gallery[0]} alt="" />
@@ -64,10 +75,14 @@ function Home() {
                                             <strong>{product.name}</strong>
 
                                             {product.hasDiscount && (
-                                                <del className="original-price">{formatMoneyToReal(product.price)}</del>
+                                                <del className="original-price">{formatMoneyToReal(originalPrice)}</del>
                                             )}
-                                            <span>{formatMoneyToReal(String(price))}</span>
-                                            <button>Adicionar ao Carrinho</button>
+                                            <span>{formatMoneyToReal(newPrice)}</span>
+                                            <button
+                                                onClick={() => handleAddProductToCart(product)}
+                                            >
+                                                Adicionar ao Carrinho
+                                            </button>
                                         </li>
                                     );
                                 })}

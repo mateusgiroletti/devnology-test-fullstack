@@ -2,11 +2,13 @@ import { ShoppingCart, User } from "@phosphor-icons/react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { CartContext } from "../../contexts/CartContext";
 
 import "./styles.css";
 
 function Header() {
     const { isAuthenticated, signOut } = useContext(AuthContext);
+    const { cartLength } = useContext(CartContext);
 
     return (
         <header>
@@ -45,7 +47,7 @@ function Header() {
 
                 <div>
                     <strong>Carrinho</strong>
-                    <span>2 Itens</span>
+                    <span>{cartLength()} Itens</span>
                 </div>
             </Link>
         </header>

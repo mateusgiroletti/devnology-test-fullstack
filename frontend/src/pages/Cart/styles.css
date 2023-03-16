@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
 }
 
 .container-cart {
@@ -26,8 +27,13 @@
     border-bottom: 1px solid #eee;
 }
 
+.container-cart table tbody td .cart-image-product{
+    max-width: 8rem;
+}
+
 .container-cart table img {
     height: 10rem;
+    border-radius: 0.5rem;
 }
 
 .container-cart table strong {
@@ -37,8 +43,8 @@
 
 .container-cart table span {
     display: block;
-    margin-top: 5px;
-    font-size: 18px;
+    margin-top: 0.5rem;
+    font-size: 1rem;
     font-weight: bold;
 }
 
@@ -51,18 +57,18 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     color: #666;
-    padding: 6px;
-    width: 50px;
+    padding: 0.5rem;
+    width: 3rem;
 }
 
 .container-cart table button {
     background: none;
     border: 0;
-    padding: 6px;
+    padding: 0.5rem;
 }
 
 .container-cart footer {
-    margin-top: 30px;
+    margin-top: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -75,25 +81,36 @@
     border-radius: 4px;
     overflow: hidden;
     margin-top: auto;
-    padding: 12px;
+    padding: 1rem;
+    display: flex;
 }
 
 .container-cart footer button:hover {
     filter: brightness(0.9);
 }
 
-.container-cart footer div {
+.container-cart footer div.button-action-footer {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    gap: 1rem;
 }
 
-.container-cart footer div span {
+.container-cart footer div.button-action-footer button:first-child{
+    background: #ee5253;
+}
+
+.container-cart footer div.total-cart {
+    display: flex;
+    align-items: center;
+    margin-right: 5rem;
+}
+
+.container-cart footer div.total-cart span {
     color: #000;
     font-weight: bold;
 }
 
-.container-cart footer div strong {
-    font-size: 28px;
-    margin-left: 5px;
+.container-cart footer div.total-cart strong {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
 }
