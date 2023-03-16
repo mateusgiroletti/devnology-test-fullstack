@@ -20,6 +20,7 @@ type AuthContextData = {
     signIn(credentitals: SignInCredentials): Promise<void>;
     signUp(credentitals: SignUpCredentials): Promise<void>;
     signOut(): void;
+    user: User,
     isAuthenticated: boolean;
 }
 
@@ -37,10 +38,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         const userToken = localStorage.getItem("user_token");
 
         if (userToken) {
-            const { data: { email } } = JSON.parse(userToken);
-            setUser({
-                email
-            });
+            const { data } = JSON.parse(userToken);
+            setUser(data);
         }
     }, []);
 
@@ -53,9 +52,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             localStorage.setItem("user_token", JSON.stringify({ data }));
 
-            setUser({
-                email
-            });
+            setUser(data);
 
             return;
         } catch (error) {
@@ -73,9 +70,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             localStorage.setItem("user_token", JSON.stringify({ data }));
 
-            setUser({
-                email
-            });
+            setUser(data);
 
             return;
         } catch (error) {
@@ -89,7 +84,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ signIn, signUp, isAuthenticated, signOut }}>
+        <AuthContext.Provider value={{ signIn, signUp, isAuthenticated, signOut, user }}>
             {children}
         </AuthContext.Provider>
     );

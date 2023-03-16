@@ -9,15 +9,18 @@ export const CartContext = createContext({});
 export const CartProvider = ({ children }: CartProviderProps) => {
     const [cart, setCart] = useState([]);
 
-    function handleAddProductToCart({ id, origin, name, newPrice, image }) {
+    function handleAddProductToCart({ id, origin, name, newPrice, image, hasDiscount, discountValue }) {
         const product = {
             name,
-            price:newPrice,
+            price: newPrice,
             image,
             origin,
             id,
-            quantity: 1
+            quantity: 1,
+            hasDiscount: hasDiscount ?? null,
+            discountValue: discountValue ?? null
         };
+
 
         const productInCart = cart.find((cartProduct) => cartProduct.id === product.id && cartProduct.origin === product.origin);
 
@@ -44,7 +47,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         if (productInCart.quantity > 1) {
             productInCart.quantity--;
             setCart([...cart]);
-        }else{
+        } else {
             handleRemoveProductFromCart(productToDelete);
         }
     }

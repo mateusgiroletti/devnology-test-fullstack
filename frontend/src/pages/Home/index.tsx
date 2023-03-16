@@ -62,6 +62,7 @@ function Home() {
                                     product.origin = "europeon";
                                     product.image = product.gallery[0];
                                     product.newPrice = newPrice;
+
                                     return (
                                         <li key={product.id}>
                                             <img src={product.gallery[0]} alt="" />

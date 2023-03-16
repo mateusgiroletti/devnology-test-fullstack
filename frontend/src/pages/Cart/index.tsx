@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { MinusCircle, PlusCircle, Trash } from "@phosphor-icons/react";
 
 import Header from "../../components/Header";
@@ -7,6 +7,9 @@ import { CartContext } from "../../contexts/CartContext";
 import formatMoneyToReal from "../../utils/formatMoneyToReal";
 
 import "./styles.css";
+import { AuthContext } from "../../contexts/AuthContext";
+import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
     const {
@@ -17,7 +20,50 @@ function Cart() {
         clearCart
     } = useContext(CartContext);
 
+    const { isAuthenticated, user } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     let total = 0;
+
+    async function handleOrder() {
+        if (!isAuthenticated) {
+            console.log("Usuario não autorizado");
+            return;
+        }
+
+        const productsToData = cart.map((product) => {
+            return {
+                name: product.name,
+                value: (product.price * product.quantity),
+                quantity: product.quantity,
+                discount_value: product.discountValue
+            };
+        });
+
+        const dataToPost = {
+            products: productsToData,
+            order: {
+                value_total: total
+            }
+        };
+
+        const response = await api.post("order", dataToPost, {
+            headers: {
+                "Authorization": `Bearer ${user.token}`
+            },
+        });
+
+        if (response.status === 401) {
+            console.log("Usuario não autenticado!");
+            return;
+        }
+
+        if (response.status === 200) {
+            console.log("Pedido criado com sucesso!");
+            clearCart();
+            navigate("/");
+        }
+    }
 
     return (
         <>
@@ -98,7 +144,7 @@ function Cart() {
                             </button>
                             <button
                                 type="button"
-                                onClick={() => console.log("clicou")}
+                                onClick={() => handleOrder()}
                             >
                                 Finalizar pedido
                             </button>
