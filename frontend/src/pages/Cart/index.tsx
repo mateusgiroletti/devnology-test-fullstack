@@ -38,8 +38,8 @@ function Cart() {
                         <tbody>
                             {
                                 cart?.map((product) => {
-                                    const subTotal = (product.price * product.quantity).toFixed(2);
-                                    total = Number(total + subTotal).toFixed(2);
+                                    const subTotal = (product.price * product.quantity);
+                                    total = Number(total + subTotal);
                                     return (
                                         <tr key={`${product.id}_${product.origin}`}>
                                             <td>
@@ -69,7 +69,7 @@ function Cart() {
                                                 </div>
                                             </td>
                                             <td>
-                                                <strong>{formatMoneyToReal(subTotal)}</strong>
+                                                <strong>{formatMoneyToReal(subTotal.toFixed(2))}</strong>
                                             </td>
                                             <td>
                                                 <button>
@@ -105,7 +105,7 @@ function Cart() {
                         </div>
                         <div className="total-cart">
                             <span>Total:</span>
-                            <strong>{formatMoneyToReal(String(total))}</strong>
+                            <strong>{formatMoneyToReal(total.toFixed(2))}</strong>
                         </div>
                     </footer>
                 </div>
