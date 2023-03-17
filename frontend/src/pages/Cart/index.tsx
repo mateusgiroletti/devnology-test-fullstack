@@ -10,6 +10,7 @@ import "./styles.css";
 import { AuthContext } from "../../contexts/AuthContext";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import { showNotification } from "../../utils/showNotification";
 
 function Cart() {
     const {
@@ -27,7 +28,7 @@ function Cart() {
 
     async function handleOrder() {
         if (!isAuthenticated) {
-            console.log("Usuario não autorizado");
+            showNotification("Usuario não autorizado!", "error");
             return;
         }
 
@@ -54,14 +55,15 @@ function Cart() {
         });
 
         if (response.status === 401) {
-            console.log("Usuario não autenticado!");
+            showNotification("Usuario não autenticado!", "error");
             return;
         }
 
         if (response.status === 200) {
-            console.log("Pedido criado com sucesso!");
-            clearCart();
-            navigate("/");
+            showNotification("Pedido criado com sucesso!", "success");
+
+            /*   clearCart();
+            navigate("/"); */
         }
     }
 

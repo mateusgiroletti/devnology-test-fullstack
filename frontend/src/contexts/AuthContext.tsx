@@ -1,5 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+
 import { api } from "../services/api";
+
+import { showNotification } from "../utils/showNotification";
 
 type User = {
     email: string;
@@ -56,7 +59,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             return;
         } catch (error) {
-            console.log("Usuario não autorizado!");
+            showNotification("Falha de autenticação!", "error");
         }
     }
 
@@ -74,7 +77,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             return;
         } catch (error) {
-            console.log("E-mail já cadastrado!");
+            showNotification("E-mail já cadastrado!", "error");
+
         }
     }
 
