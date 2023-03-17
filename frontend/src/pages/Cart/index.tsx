@@ -32,7 +32,7 @@ function Cart() {
             return;
         }
 
-        if(cart.length === 0){
+        if (cart.length === 0) {
             showNotification("Carrinho vazio! adicione algo para finalizar o pedido!", "error");
             return;
         }
@@ -40,7 +40,7 @@ function Cart() {
         const productsToData = cart.map((product) => {
             return {
                 name: product.name,
-                value: (product.price * product.quantity),
+                value: product.price ? product.price * product.quantity : 0,
                 quantity: product.quantity,
                 discount_value: product.discountValue
             };
@@ -91,7 +91,7 @@ function Cart() {
                         <tbody>
                             {
                                 cart?.map((product) => {
-                                    const subTotal = (product.price * product.quantity);
+                                    const subTotal = product.price ? product.price * product.quantity : 0;
                                     total = Number(total + subTotal);
                                     return (
                                         <tr key={`${product.id}_${product.origin}`}>
@@ -102,7 +102,7 @@ function Cart() {
                                             </td>
                                             <td>
                                                 <strong>{product.name}</strong>
-                                                <span>{formatMoneyToReal(product.price)}</span>
+                                                <span>{formatMoneyToReal(String(product.price))}</span>
                                             </td>
                                             <td>
                                                 <div>

@@ -6,6 +6,7 @@ import { showNotification } from "../utils/showNotification";
 
 type User = {
     email: string;
+    token: string;
 }
 
 type SignInCredentials = {

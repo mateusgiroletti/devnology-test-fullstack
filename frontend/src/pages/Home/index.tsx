@@ -13,8 +13,8 @@ function Home() {
 
     const [search, setSearch] = useState("");
 
-    const productsNationalFilter = productNational?.filter((product: any) => product.nome.startsWith(search));
-    const productsEuropeonFilter = productEuropeon?.filter((product: any) => product.name.startsWith(search));
+    const productsNationalFilter = productNational?.filter((product) => product.nome.startsWith(search));
+    const productsEuropeonFilter = productEuropeon?.filter((product) => product.name.startsWith(search));
 
     return (
         <>
@@ -58,10 +58,10 @@ function Home() {
                                 })}
                                 {productsEuropeonFilter?.map(product => {
                                     const originalPrice = product.price;
-                                    const newPrice = product.hasDiscount ? (product.price - (product.price * product.discountValue)).toFixed(2) : product.price;
+                                    const newPrice = product.hasDiscount ? Number(product.price - (product.price * product.discountValue)).toFixed(2) : Number(product.price);
                                     product.origin = "europeon";
                                     product.image = product.gallery[0];
-                                    product.newPrice = newPrice;
+                                    product.newPrice = Number(newPrice);
 
                                     return (
                                         <li key={product.id}>
@@ -69,7 +69,7 @@ function Home() {
 
                                             {product.hasDiscount && (
                                                 <div className="discount">
-                                                    <span>{product.discountValue * 100}% OFF</span>
+                                                    <span>{Number(product.discountValue) * 100}% OFF</span>
                                                 </div>
                                             )}
 
@@ -78,7 +78,7 @@ function Home() {
                                             {product.hasDiscount && (
                                                 <del className="original-price">{formatMoneyToReal(originalPrice)}</del>
                                             )}
-                                            <span>{formatMoneyToReal(newPrice)}</span>
+                                            <span>{formatMoneyToReal(String(newPrice))}</span>
                                             <button
                                                 onClick={() => handleAddProductToCart(product)}
                                             >

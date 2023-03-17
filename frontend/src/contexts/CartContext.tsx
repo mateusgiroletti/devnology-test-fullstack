@@ -9,7 +9,7 @@ type CartItem = {
     origin: string;
     newPrice?: number;
     price?: number;
-    quantity: number
+    quantity?: number
     hasDiscount?: boolean | null;
     discountValue?: number | null;
 }
