@@ -11,6 +11,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { showNotification } from "../../utils/showNotification";
+import { AxiosError } from "axios";
 
 function Cart() {
     const {
@@ -54,22 +55,27 @@ function Cart() {
             }
         };
 
-        const response = await api.post("order", dataToPost, {
-            headers: {
-                "Authorization": `Bearer ${user.token}`
-            },
-        });
+        try {
+            const response = await api.post("order", dataToPost, {
+                headers: {
+                    "Authorization": `Bearer ${user.token}`
+                },
+            });
 
-        if (response.status === 401) {
-            showNotification("Usuario não autenticado!", "error");
-            return;
-        }
+            if (response.status === 200) {
+                showNotification("Pedido criado com sucesso!", "success");
 
-        if (response.status === 200) {
-            showNotification("Pedido criado com sucesso!", "success");
+                clearCart();
+                navigate("/");
+            }
 
-            clearCart();
-            navigate("/");
+        } catch (error) {
+            const { response } = error as AxiosError;
+
+            if (response?.status === 401) {
+                showNotification("Usuario não autorizado!", "error");
+                return;
+            }
         }
     }
 
