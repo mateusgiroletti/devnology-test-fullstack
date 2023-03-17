@@ -29,9 +29,9 @@ type CartContextData = {
 
 export const CartContext = createContext({} as CartContextData);
 
-export const CartProvider = ({ children }: CartProviderProps) => {
+export function CartProvider({ children }: CartProviderProps) {
     const [cart, setCart] = useLocalStorage<CartItem[]>(
-        "shopping-cart",
+        "cart_products",
         []
     );
 
@@ -51,6 +51,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
         if (!productInCart) {
             setCart([...cart, product]);
+            showNotification("Produto adicionado ao carrinho!", "success");
         } else {
             productInCart.quantity++;
             setCart([...cart]);
@@ -111,4 +112,4 @@ export const CartProvider = ({ children }: CartProviderProps) => {
             {children}
         </CartContext.Provider>
     );
-};
+}

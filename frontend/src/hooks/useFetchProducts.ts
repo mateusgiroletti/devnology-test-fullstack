@@ -38,8 +38,6 @@ type ProductEuropeon = {
 export function useFetchProducts() {
     const [productNational, setProductNational] = useState<ProductNational[]>();
     const [productEuropeon, setProductEuropeon] = useState<ProductEuropeon[]>();
-    const [isFetching, setIsFetching] = useState(true);
-    const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
 
@@ -56,9 +54,7 @@ export function useFetchProducts() {
         };
 
         fetchProductEuropeon();
-
-        setIsFetching(false);
     }, []);
 
-    return { productNational, productEuropeon, error, isFetching };
+    return { productNational, productEuropeon};
 }

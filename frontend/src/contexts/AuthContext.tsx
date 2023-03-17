@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 import { api } from "../services/api";
 
@@ -35,17 +36,11 @@ type AuthProviderProps = {
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const [user, setUser] = useState<User | null>();
+    const [user, setUser] = useLocalStorage<User | null>(
+        "user_token",
+        null
+    );
     const isAuthenticated = !!user;
-
-    useEffect(() => {
-        const userToken = localStorage.getItem("user_token");
-
-        if (userToken) {
-            const { data } = JSON.parse(userToken);
-            setUser(data);
-        }
-    }, []);
 
     async function signIn({ email, password }: SignInCredentials) {
         try {
@@ -53,8 +48,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 email,
                 password
             });
-
-            localStorage.setItem("user_token", JSON.stringify({ data }));
 
             setUser(data);
 
@@ -71,8 +64,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 email,
                 password
             });
-
-            localStorage.setItem("user_token", JSON.stringify({ data }));
 
             setUser(data);
 

@@ -27,13 +27,14 @@ function Cart() {
     let total = 0;
 
     async function handleOrder() {
-        if (!isAuthenticated) {
-            showNotification("Usuario não autorizado!", "error");
+        if (cart.length === 0) {
+            showNotification("Carrinho vazio! adicione algo para finalizar o pedido!", "error");
             return;
         }
 
-        if (cart.length === 0) {
-            showNotification("Carrinho vazio! adicione algo para finalizar o pedido!", "error");
+        if (!isAuthenticated) {
+            showNotification("Usuario não autenticado!", "error");
+            navigate("/signIn");
             return;
         }
 
