@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { showNotification } from "../utils/showNotification";
 
 type CartProviderProps = {
     children: ReactNode;
@@ -53,6 +54,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     }
 
     function clearCart() {
+        if(cart.length === 0){
+            showNotification("O carrinho já se encontra vazio!", "error");
+            return;
+        }
         setCart([]);
     }
 

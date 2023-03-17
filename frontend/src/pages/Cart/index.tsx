@@ -32,6 +32,11 @@ function Cart() {
             return;
         }
 
+        if(cart.length === 0){
+            showNotification("Carrinho vazio! adicione algo para finalizar o pedido!", "error");
+            return;
+        }
+
         const productsToData = cart.map((product) => {
             return {
                 name: product.name,
@@ -62,8 +67,8 @@ function Cart() {
         if (response.status === 200) {
             showNotification("Pedido criado com sucesso!", "success");
 
-            /*   clearCart();
-            navigate("/"); */
+            clearCart();
+            navigate("/");
         }
     }
 
