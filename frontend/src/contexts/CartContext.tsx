@@ -85,7 +85,7 @@ export function CartProvider({ children }: CartProviderProps) {
 
     function clearCart() {
         if (cart.length === 0) {
-            showNotification("O carrinho já se encontra vazio!", "error");
+            showNotification("O carrinho já se encontra vazio!", "alert");
             return;
         }
         setCart([]);

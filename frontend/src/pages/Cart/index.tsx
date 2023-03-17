@@ -29,12 +29,12 @@ function Cart() {
 
     async function handleOrder() {
         if (cart.length === 0) {
-            showNotification("Carrinho vazio! adicione algo para finalizar o pedido!", "error");
+            showNotification("Carrinho vazio! adicione algo para finalizar o pedido!", "alert");
             return;
         }
 
         if (!isAuthenticated) {
-            showNotification("Usuario não autenticado!", "error");
+            showNotification("Realize o loggin para finalizar a compra", "alert");
             navigate("/signIn");
             return;
         }

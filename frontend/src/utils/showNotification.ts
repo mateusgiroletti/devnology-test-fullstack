@@ -8,4 +8,8 @@ export function showNotification(textMessage: string, typeMessage: string) {
     if (typeMessage === "success") {
         return toast.success(textMessage);
     }
+
+    if (typeMessage === "alert") {
+        return toast.warn(textMessage);
+    }
 }
