@@ -9,13 +9,13 @@ Apos terminar o back-end e testalo, parti para o desenvolvimento do front, a apl
 </p>
 
 <p align="center">
-  <img src="../.github/prints/home.png" width="1200">
+    <img src="../.github/prints/home.png" width="1200">
 </p>
 
 ## Tela do carrinho
 
 <p align="justify">
-    Para o gerenciamento dos produtos selecionados, foi criado a tela de carrinho, onde é listado todos os produtos, suas quantidades, subtotal e total do pedido. É possível aumentar ou diminuir a quantidade de produtos, caso seja diminuído para zero, ele remove o produto do carrinho. Existe também a possibilidade de remover o produto no ícone de lixeira.
+    Para o gerenciamento dos produtos selecionados, foi criado a tela de carrinho, onde é listado todos os produtos, suas quantidades, subtotal e total do pedido. É possível aumentar ou diminuir a quantidade de produtos, caso seja diminuído para zero, ele remove o produto do carrinho. Existe também a possibilidade de remover o produto no ícone de lixeira. As informações do carrinho ficam salvas no local storage, assim é possível atualizar a página ou reabrir ela e as informações continuam no carrinho.
 </p>
 
 <p align="justify">
@@ -23,7 +23,11 @@ Apos terminar o back-end e testalo, parti para o desenvolvimento do front, a apl
 </p>
 
 <p align="justify">
-    O botão de finalizar pedido quando acionado faz o envio dos dados para o back-end que por sua vez cria o pedido e armazena as informações no banco de dados. Caso essa operação ocorra com sucesso, é retornada uma mensagem de sucesso, o usuário é direcionado para a tela Home e o carrinho é limpo.
+    O botão de finalizar pedido quando acionado, verifica se o usuário está logado, caso não esteja, é direcionado para a página de login/cadastro.
+</p>
+
+<p align="justify">
+    Caso o usuário já esteja autenticado, faz o envio dos dados para o back-end que por sua vez cria o pedido e armazena as informações no banco de dados. Caso essa operação ocorra com sucesso, é retornada uma mensagem de sucesso, o usuário é direcionado para a tela Home e o carrinho é limpo.
 </p>
 
 <p align="center">
@@ -32,56 +36,40 @@ Apos terminar o back-end e testalo, parti para o desenvolvimento do front, a apl
 
 ## Tela de Login
 
+<p align="justify">
+   A tela de login é bem simples, é necessário um e-mail e senha para autenticar. Ao realizar o login, o back-end devolve o e-mail e o token de autenticação, que são salvos no local storage.
+</p>
+
 <p align="center">
   <img src="../.github/prints/signIn.png" width="1200">
 </p>
 
 ## Tela de Cadastro
 
+<p align="justify">
+    Para realizar o cadastro é necessário inserir um nome, e-mail e senha. Essas informações são enviadas para o back-end, onde a API salva no banco de dados e retorna o usuário autenticado e o token.
+</p>
+
 <p align="center">
   <img src="../.github/prints/signUp.png" width="1200">
 </p>
 
 ## Como Rodar o projeto
-Como ja sitado anterirmente é necessario o docker instalado na maquina.
+Como ja citado anterirmente é necessario o docker instalado na maquina.
 
-Clone este projeto em um diretório e mude para o diretório de back-end:
+Clone este projeto em um diretório e mude para o diretório frontend:
 
 ```console
-cd backend
+cd frontend
 ```
 
-Rode o seguinte comando para instar as dependencias da pasta vendor:
+Start the dockers containers.
 
 ```console
-docker run --rm \
-    -u "$(id -u):$(id -g)" \
-    -v $(pwd):/var/www/html \
-    -w /var/www/html \
-    laravelsail/php81-composer:latest \
-    composer install --ignore-platform-reqs
+docker-compose up -d
 ```
-
-Copie o arquivo .env.example para .env e insira as configs de banco de dados (fica a sua escolha):
-
-```console
-cp .env.example .env
-```
-
-Suba o servidor:
+O aplicativo estará disponível em
 
 ```console
-./vendor/bin/sail up -d
-```
-
-E por fim rode as migrations:
-
-```console
-./vendor/bin/sail artisan migrate
-```
-
-E pronto, a aplicação esta disponivel no seguinte endereço:
-
-```console
-http://localhost/api
+http://localhost:3001/
 ```

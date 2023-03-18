@@ -124,9 +124,10 @@ Rota responsavel por criar um pedido e armazenar as informações no banco de da
 | 500 | `INTERNAL SERVER ERROR` |
 
 ## Como Rodar o projeto
-Como ja sitado anterirmente é necessario o docker instalado na maquina.
 
-Clone este projeto em um diretório e mude para o diretório de back-end:
+Como ja citado anterirmente é necessario o docker instalado na maquina.
+
+Clone este projeto em um diretório e mude para o diretório backend:
 
 ```console
 cd backend
