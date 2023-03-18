@@ -67,7 +67,7 @@ Rota responsavel por criar um pedido e armazenar as informações no banco de da
 
     + Headers
 
-                Authorization: Bearer [access_token]
+                Authorization: Bearer [token]
    + Body
 
            {
