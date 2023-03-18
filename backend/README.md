@@ -1,6 +1,6 @@
 ## Back-end
 
-Aqui foi onde eu iniciei a codificação, utilizei a ferramenta sail para iniciar um projeto com o docker, assim não sendo necessario instalar o PHP e/ou outro servidor web na maquina para rodar a aplicação.
+Aqui foi onde eu iniciei a codificação, utilizei a ferramenta sail para iniciar um projeto com o docker, assim não sendo necessario instalar o PHP e/ou outro servidor web na maquina para rodar a aplicação. O banco de dados utilizado para armazenar as informações é o MySQL.
 
 ## Migrations
 
@@ -112,3 +112,13 @@ Rota responsavel por criar um pedido e armazenar as informações no banco de da
                 }
                 
             }
+
+## Status Codes
+
+| Status Code | Description |
+| :--- | :--- |
+| 200 | `OK` |
+| 201 | `CREATED` |
+| 401 | `NOT AUTHORIZED` |
+| 404 | `NOT FOUND` |
+| 500 | `INTERNAL SERVER ERROR` |
