@@ -122,3 +122,47 @@ Rota responsavel por criar um pedido e armazenar as informações no banco de da
 | 401 | `NOT AUTHORIZED` |
 | 404 | `NOT FOUND` |
 | 500 | `INTERNAL SERVER ERROR` |
+
+## Como Rodar o projeto
+Como ja sitado anterirmente é necessario o docker instalado na maquina.
+
+Clone este projeto em um diretório e mude para o diretório de back-end:
+
+```console
+cd backend
+```
+
+Rode o seguinte comando para instar as dependencias da pasta vendor:
+
+```console
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
+```
+
+Copie o arquivo .env.example para .env e insira as configs de banco de dados (fica a sua escolha):
+
+```console
+cp .env.example .env
+```
+
+Suba o servidor:
+
+```console
+./vendor/bin/sail up -d
+```
+
+E por fim rode as migrations:
+
+```console
+./vendor/bin/sail artisan migrate
+```
+
+E pronto, a aplicação esta disponivel no seguinte endereço:
+
+```console
+http://localhost/api
+```
