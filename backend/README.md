@@ -11,7 +11,7 @@ Primeiramente foi criados as migrations necessarias para criação das tabelas e
 A seguir foi criado as models e seus relacionamentos. Abaixo é possivel visualizar o modelo do banco de dados.
 
 <p align="center">
-  <img src="../.github/prints/modelo_banco_dados.PNG">
+  <img src="../.github/prints/modelo_banco_dados.png">
 </p>
 
 ## Rotas e Controllers
