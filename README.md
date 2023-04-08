@@ -2,7 +2,7 @@
 
 Este é um projeto/teste para a vaga de fullstack da devnology.
 
-## Obejetivo
+## Objetivo
 
 O objetivo era criar um eCommerce para uma determinada loja conseguir vender seus produtos, está por usa vez possui dois fornecedores que construíram uma API para a aplicação consumir a lista de produtos. O usuário deveria ser capaz de realizar filtros de pesquisa pelo nome dos produtos, que todos os produtos selecionados fossem para um carrinho de compras e o pedido deveria ser cadastrado em um banco de dados com as informações do cliente e dos produtos.
 
