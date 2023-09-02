@@ -2,28 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateUserRequest;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
-    public function store(Request $request)
+    protected $userService;
+
+    public function __construct(UserService $userService)
     {
-        $newUser = [
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
-        ];
+        $this->userService = $userService;
+    }
 
-        $user = User::create($newUser);
+    public function store(CreateUserRequest $request)
+    {
 
-        auth()->login($user);
-        $token = $user->createToken('JWT');
+        $newUser = $this->userService->createUser($request);
+
+        dd($newUser);
+
+
+        /*   auth()->login($user);
+        $token = $user->createToken('JWT'); */
 
         return response()->json(
             [
-                "email" => $request['email'],
-                "token" => $token->plainTextToken
+                /* "email" => $request['email'],
+                "token" => $token->plainTextToken */
             ]
         );
     }
