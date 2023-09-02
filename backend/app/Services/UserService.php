@@ -22,6 +22,11 @@ class UserService
             'password' => bcrypt($request['password']),
         ];
 
-        return $this->userRepository->create($newUser);
+        $createadUser = $this->userRepository->create($newUser);
+
+        auth()->login($createadUser);
+        $token = $createadUser->createToken('JWT');
+
+        return $token;
     }
 }

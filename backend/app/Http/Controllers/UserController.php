@@ -17,18 +17,12 @@ class UserController extends Controller
     public function store(CreateUserRequest $request)
     {
 
-        $newUser = $this->userService->createUser($request);
-
-        dd($newUser);
-
-
-        /*   auth()->login($user);
-        $token = $user->createToken('JWT'); */
+        $tokenNewUser = $this->userService->createUser($request);
 
         return response()->json(
             [
-                /* "email" => $request['email'],
-                "token" => $token->plainTextToken */
+                "email" => $request['email'],
+                "token" => $tokenNewUser->plainTextToken
             ]
         );
     }
