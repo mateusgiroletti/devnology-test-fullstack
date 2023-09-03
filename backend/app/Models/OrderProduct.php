@@ -9,12 +9,13 @@ class OrderProduct extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $table = 'orders_products';
 
     protected $fillable = [
-        'order_product',
+        'order_id',
         'product_id',
         'quantity',
     ];
-
 }

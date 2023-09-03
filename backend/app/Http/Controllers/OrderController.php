@@ -2,39 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CreateOrderRequest;
+use App\Services\OrderService;
 
 class OrderController extends Controller
 {
-    public function store(Request $request)
+    protected $orderService;
+
+    public function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
+
+    public function store(CreateOrderRequest $request)
     {
 
-        $userId = $request->user()->id;
+        $createOrder = $this->orderService->createOrder($request);
 
-        $order = $request->order;
-        $order['user_id'] = $userId;
-
-        $orderId = DB::table('orders')->insertGetId($order);
-
-        $products = $request->products;
-        foreach ($products as $product) {
-            $dataProduct = [
-                'name' => $product['name'],
-                'value' => $product['value'],
-                'discount_value' => $product['discount_value'] ?? null
-            ];
-
-            $productId = DB::table('products')->insertGetId($dataProduct);
-
-            $orderProduct = [
-                'order_id' => $orderId,
-                'product_id' => $productId,
-                'quantity' => $product['quantity']
-            ];
-
-            DB::table('orders_products')->insert($orderProduct);
+        if ($createOrder->error) {
+            return response()->json(
+                [
+                    'erro' => true,
+                    'message' => 'Error inserting data'
+                ],
+                400
+            );
         }
+
         return response()->json($request);
     }
 }
