@@ -2,35 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CreateSessionRequest;
+use App\Services\SessionService;
 
 class SessionController extends Controller
 {
-    public function store(Request $request)
+    protected $sessionService;
+
+    public function __construct(SessionService $sessionService)
     {
-        $userLogin = [
-            'email' => $request->email, 'password' => $request->password
-        ];
+        $this->sessionService = $sessionService;
+    }
 
-        if (Auth::attempt($userLogin)) {
-            $user = Auth::user();
-            $token = $user->createToken('JWT');
+    public function store(CreateSessionRequest $request)
+    {
+        $createSession = $this->sessionService->createSession($request);
 
+        if ($createSession->error) {
             return response()->json(
                 [
-                    "email" => $request['email'],
-                    "token" => $token->plainTextToken
-                ]
+                    'erro' => true,
+                    'message' => 'user invalid'
+                ],
+                401
             );
         }
 
         return response()->json(
             [
-                'erro' => true,
-                'message' => 'user invalid'
-            ],
-            401
+                "email" => $request['email'],
+                "token" => $createSession->token->plainTextToken
+            ]
         );
     }
 }
