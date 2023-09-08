@@ -15,8 +15,6 @@ class UserTest extends TestCase
 
     public function test_users_database_has_expected_columns()
     {
-        $this->assertTrue(true);
-
         $this->assertTrue(
             Schema::hasColumns('users', [
                 'id', 'name', 'email', 'password'
