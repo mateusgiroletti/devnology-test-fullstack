@@ -20,7 +20,7 @@ class Product extends Model
         'discount_value',
     ];
 
-    function product(): BelongsToMany
+    function order(): BelongsToMany
     {
         return $this->belongsToMany(Order::class, 'orders_products', 'product_id', 'order_id');
     }
