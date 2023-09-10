@@ -16,6 +16,7 @@ class OrderTest extends TestCase
 
     public function test_orders_database_has_expected_columns()
     {
+        // Verifica se as colunas existens no Schema
         $this->assertTrue(
             Schema::hasColumns('orders', [
                 'value_total', 'user_id'
@@ -41,7 +42,6 @@ class OrderTest extends TestCase
 
     public function test_order_belongs_to_many_products()
     {
-        // Crie uma ordem
         $order = Order::factory()->create();
 
         // Crie alguns produtos associados a essa ordem

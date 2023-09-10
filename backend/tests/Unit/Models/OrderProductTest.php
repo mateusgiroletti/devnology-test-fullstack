@@ -9,6 +9,7 @@ class OrderProductTest extends TestCase
 {
     public function test_order_product_database_has_expected_columns()
     {
+        // Verifica se as colunas existens no Schema
         $this->assertTrue(
             Schema::hasColumns('orders_products', [
                 'order_id', 'product_id', 'quantity'

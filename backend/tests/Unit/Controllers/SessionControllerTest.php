@@ -16,7 +16,6 @@ class SessionControllerTest extends TestCase
         $request = CreateSessionRequest::create('/api/sessions', 'POST', [
             'email' => 'test@example.com',
             'password' => 'password',
-            // Adicione outros campos necessários aqui
         ]);
 
         // Crie uma instância falsa do SessionService

@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class UserServiceTest extends TestCase
 {
-    use RefreshDatabase; // Use this to refresh the database for testing
+    use RefreshDatabase;
 
     public function testCreateUserMethod()
     {
@@ -20,7 +20,6 @@ class UserServiceTest extends TestCase
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => 'testpassword',
-            // Adicione outros campos necessários aqui
         ]);
 
         // Crie uma instância falsa do UserRepository
